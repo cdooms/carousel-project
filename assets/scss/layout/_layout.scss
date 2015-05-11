@@ -2,3 +2,12 @@
 // LAYOUT.SCSS //
 // This file contains global page layout rules, layout rules that return on every page
 // ====================================================================================================== //
+.row {
+  background: $c-blue-dark;
+}
+
+.container {
+  color: $c-white;
+  padding: 20px 0;
+  width: 100%;
+}

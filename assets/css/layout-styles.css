@@ -1,3 +1,11 @@
+.row {
+  background: #002f65;
+}
 
+.container {
+  color: white;
+  padding: 20px 0;
+  width: 100%;
+}
 
 /*# sourceMappingURL=layout-styles.css.map */

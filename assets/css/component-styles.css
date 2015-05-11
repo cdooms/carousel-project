@@ -1,3 +1,15 @@
-/* No files to import found in components/**\/* */
+.slider-pro {
+  width: 100%;
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 25px;
+}
+.slider-pro .sp-slide.red {
+  border-top: 8px solid #e54126;
+}
+.slider-pro .sp-slide img.sp-image {
+  max-width: 100%;
+}
 
 /*# sourceMappingURL=component-styles.css.map */

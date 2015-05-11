@@ -4,3 +4,15 @@
 // ====================================================================================================== //
 
 // +font-face("NAME", font-files("FILE.woff", "FILE.ttf", "FILE.otf", "FILE.svg"), "FILE.eot")
+h2 {
+  font-size: 24px;
+}
+
+a {
+  color: $c-white;
+  text-decoration: underline;
+
+  &:hover {
+    color: $c-orange;
+  }
+}

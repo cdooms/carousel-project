@@ -1,0 +1,14 @@
+.slider-pro {
+  @include span(12 of 12);
+  margin-top: 25px;
+
+  .sp-slide {
+    &.red {
+      border-top: 8px solid $c-red;
+    }
+
+    img.sp-image {
+      max-width: 100%;
+    }
+  }
+}

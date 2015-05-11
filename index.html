@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Susy Demo</title>
+<title>Carousel Demo</title>
 <meta name="description" content="">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -34,8 +34,13 @@
 <meta name="apple-mobile-web-app-title" content="">
 -->
 <!-- CSS files -->
-<link rel="stylesheet" href="assets/css/styles.css">
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="assets/css/base-styles.css">
+<link rel="stylesheet" href="assets/css/component-styles.css">
+<link rel="stylesheet" href="assets/css/helper-styles.css">
+<link rel="stylesheet" href="assets/css/layout-styles.css">
+<link rel="stylesheet" href="assets/css/print-styles.css">
+<!-- <link rel="stylesheet" href="assets/css/slider-pro.min.css"/>
+ --><link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
 <!-- Uncomment to include modernizer.js
 <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -47,8 +52,41 @@
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 <![endif]-->
 
-  <div class="container">
+  <div class="row">
+    <div class="container">
+      <h2>Latest News</h2>
+      <a class="show-all" href="index.html" >Show all news</a>
 
+      <div class="slider-pro" id="my-slider">
+        <div class="sp-slides">
+            <!-- Slide 1 -->
+            <div class="sp-slide red">
+                <img class="sp-image" src="http://bqworks.com/slider-pro/images/image1_large.jpg"/>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="sp-slide">
+                <img class="sp-image" src="http://bqworks.com/slider-pro/images/image2_large.jpg"/>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="sp-slide">
+                <img class="sp-image" src="http://bqworks.com/slider-pro/images/image3_large.jpg"/>
+            </div>
+        </div>
+
+        <div class="sp-thumbnails">
+          <img class="sp-thumbnail" src="path/to/thumbnail.jpg"/>
+
+          <p class="sp-thumbnail">Thumbnail 2</p>
+
+          <div class="sp-thumbnail">
+            <img class="sp-thumbnail-image" src="path/to/thumbnail.jpg"/>
+            <p class="sp-thumbnail-text">Tempor incididunt ut labore et dolore magna</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -58,6 +96,21 @@
 <!-- Javascripts -->
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
+<script src="js/vendor/jquery.sliderPro.min.js"></script>
+<script type="text/javascript">
+    jQuery( document ).ready(function( $ ) {
+      $( '#my-slider' ).sliderPro({
+        width: 960,
+        height: 500,
+        arrows: true,
+        buttons: false,
+        waitForLayers: true,
+        fade: true,
+        autoplay: false,
+        autoScaleLayers: false
+      });
+    });
+</script>
 
 
 
