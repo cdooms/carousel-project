@@ -19,18 +19,21 @@
     }
   };
 
-  site = {
-    myCode: {
-      attach: function() {
-        return console.log("myCode");
-      }
-    },
-    myCode2: {
-      attach: function() {
-        return console.log("myCode2");
-      }
-    }
-  };
+  // site = {
+  //   carousel: {
+  //     attach: function() {
+  //       $( "#my-slider" ).sliderPro({
+  //         width: 100%,
+  //         arrows: true,
+  //         buttons: true,
+  //         waitForLayers: true,
+  //         fade: true,
+  //         autoplay: false,
+  //         autoScaleLayers: false
+  //       });
+  //     }
+  //   };
+  // };
 
   _.extend(Drupal.behaviors, site);
 

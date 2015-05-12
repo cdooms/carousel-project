@@ -104,15 +104,15 @@
 
 		// Reference to the old slide height, used to check if the height has changed
 		this.previousSlideHeight = 0;
-		
+
 		// Reference to the old window width, used to check if the window width has changed
 		this.previousWindowWidth = 0;
-		
+
 		// Reference to the old window height, used to check if the window height has changed
 		this.previousWindowHeight = 0;
 
 		// The distance from the margin of the slider to the left/top of the selected slide.
-		// This is useful in calculating the position of the selected slide when there are 
+		// This is useful in calculating the position of the selected slide when there are
 		// more visible slides.
 		this.visibleOffset = 0;
 
@@ -158,7 +158,7 @@
 			// older IE versions might need CSS tweaks.
 			var rmsie = /(msie) ([\w.]+)/,
 				ieVersion = rmsie.exec( window.navigator.userAgent.toLowerCase() );
-			
+
 			if ( this.isIE ) {
 				this.$slider.addClass( 'ie' );
 			}
@@ -173,7 +173,7 @@
 			this.$slidesMask = $( '<div class="sp-mask"></div>' ).appendTo( this.$slidesContainer );
 			this.$slides = this.$slider.find( '.sp-slides' ).appendTo( this.$slidesMask );
 			this.$slider.find( '.sp-slide' ).appendTo( this.$slides );
-			
+
 			var modules = $.SliderPro.modules;
 
 			// Merge the modules' default settings with the core's default settings
@@ -244,20 +244,20 @@
 				$.each( this.shuffledIndexes, function( index, element ) {
 					shuffledSlides.push( slides[ element ] );
 				});
-				
+
 				// Append the sorted slides to the slider
 				this.$slides.empty().append( shuffledSlides ) ;
 			}
-			
+
 			// Resize the slider when the browser window resizes.
 			// Also, deffer the resizing in order to not allow multiple
 			// resizes in a 200 milliseconds interval.
 			$( window ).on( 'resize.' + this.uniqueId + '.' + NS, function() {
-			
+
 				// Get the current width and height of the window
 				var newWindowWidth = $( window ).width(),
 					newWindowHeight = $( window ).height();
-				
+
 				// If the resize is not allowed yet or if the window size hasn't changed (this needs to be verified
 				// because in IE8 and lower the resize event is triggered whenever an element from the page changes
 				// its size) return early.
@@ -265,11 +265,11 @@
 					( that.previousWindowWidth === newWindowWidth && that.previousWindowHeight === newWindowHeight ) ) {
 					return;
 				}
-				
+
 				// Asign the new values for the window width and height
 				that.previousWindowWidth = newWindowWidth;
 				that.previousWindowHeight = newWindowHeight;
-			
+
 				that.allowResize = false;
 
 				setTimeout(function() {
@@ -385,7 +385,7 @@
 			// If the distance is negative it means that the selected slider is before the middle position, so
 			// slides from the end of the array will be added at the beginning, in order to shift the selected slide
 			// forward.
-			// 
+			//
 			// If the distance is positive, slides from the beginning of the array will be added at the end.
 			if ( distance < 0 ) {
 				slicedItems = this.slidesOrder.splice( distance, Math.abs( distance ) );
@@ -430,7 +430,7 @@
 
 			// Check if the current window width is bigger than the biggest breakpoint
 			// and if necessary reset the properties to the original settings.
-			// 
+			//
 			// If the window width is smaller than a certain breakpoint, apply the settings specified
 			// for that breakpoint but only after merging them with the original settings
 			// in order to make sure that only the specified settings for the breakpoint are applied
@@ -450,7 +450,7 @@
 								this.currentBreakpoint = this.breakpoints[ i ].size;
 								var settings = $.extend( {}, this.originalSettings, this.breakpoints[ i ].properties );
 								this._setProperties( settings, false );
-								
+
 								return;
 							}
 
@@ -479,7 +479,7 @@
 			if ( this.settings.aspectRatio === -1 ) {
 				this.settings.aspectRatio = this.settings.width / this.settings.height;
 			}
-			
+
 			// Initially set the slide width to the size of the slider.
 			// Later, this will be set to less if there are multiple visible slides.
 			this.slideWidth = this.$slider.width();
@@ -509,7 +509,7 @@
 			// The slide width or slide height is needed for several calculation, so create a reference to it
 			// based on the current orientation.
 			this.slideSize = this.settings.orientation === 'horizontal' ? this.slideWidth : this.slideHeight;
-			
+
 			// Initially set the visible size of the slides and the offset of the selected slide as if there is only
 			// on visible slide.
 			// If there will be multiple visible slides (when 'visibleSize' is different than 'auto'), these will
@@ -551,7 +551,7 @@
 					} else {
 						this.$slider.css({ 'width': this.settings.visibleSize, 'max-width': '100%', 'marginLeft': 0 });
 					}
-					
+
 					this.$slidesMask.css( 'width', this.$slider.width() );
 
 					this.visibleSlidesSize = this.$slidesMask.width();
@@ -675,9 +675,9 @@
 			if ( position === this.slidesPosition ) {
 				return;
 			}
-			
+
 			this.slidesPosition = position;
-			
+
 			if ( ( this.supportedAnimation === 'css-3d' || this.supportedAnimation === 'css-2d' ) && this.isIE === false ) {
 				var transition,
 					left = this.settings.orientation === 'horizontal' ? position : 0,
@@ -702,7 +702,7 @@
 
 						that.$slides.off( that.transitionEvent );
 						that.$slides.removeClass( 'sp-animated' );
-						
+
 						if ( typeof callback === 'function' ) {
 							callback();
 						}
@@ -742,7 +742,7 @@
 					matrixArray = matrixString.replace( matrixType, '' ).match( /-?[0-9\.]+/g ),
 					left = matrixType === 'matrix3d' ? parseInt( matrixArray[ 12 ], 10 ) : parseInt( matrixArray[ 4 ], 10 ),
 					top = matrixType === 'matrix3d' ? parseInt( matrixArray[ 13 ], 10 ) : parseInt( matrixArray[ 5 ], 10 );
-					
+
 				// Set the transform property to the value that the transform had when the function was called
 				if ( this.supportedAnimation === 'css-3d' ) {
 					css[ this.vendorPrefix + 'transform' ] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
@@ -802,7 +802,7 @@
 		destroy: function() {
 			// Remove the stored reference to this instance
 			this.$slider.removeData( 'sliderPro' );
-			
+
 			// Clean the CSS
 			this.$slider.removeAttr( 'style' );
 			this.$slides.removeAttr( 'style' );
@@ -829,7 +829,7 @@
 
 			this.slides.length = 0;
 
-			// Move the slides to their initial position in the DOM and 
+			// Move the slides to their initial position in the DOM and
 			// remove the container elements created dynamically.
 			this.$slides.prependTo( this.$slider );
 			this.$slidesContainer.remove();
@@ -931,7 +931,7 @@
 
 			// Sets the size of the visible area, allowing the increase of it in order
 			// to make more slides visible.
-			// By default, only the selected slide will be visible. 
+			// By default, only the selected slide will be visible.
 			visibleSize: 'auto',
 
 			// Breakpoints for allowing the slider's options to be changed
@@ -1035,7 +1035,7 @@
 		// Set the size of the slide
 		setSize: function( width, height ) {
 			var that = this;
-			
+
 			this.width = width;
 			this.height = this.settings.autoHeight === true ? 'auto' : height;
 
@@ -1126,7 +1126,7 @@
 		},
 
 		// Resize the main image.
-		// 
+		//
 		// Call this when the slide resizes or when the main image has changed to a different image.
 		resizeMainImage: function( isNewImage ) {
 			var that = this;
@@ -1315,7 +1315,7 @@
 			} else {
 				this.supportedAnimation = 'javascript';
 			}
-			
+
 			return this.supportedAnimation;
 		},
 
@@ -1327,19 +1327,19 @@
 
 			var div = document.createElement( 'div' ),
 				prefixes = [ 'Webkit', 'Moz', 'ms', 'O' ];
-			
+
 			if ( 'transform' in div.style ) {
 				this.vendorPrefix = '';
 				return this.vendorPrefix;
 			}
-			
+
 			for ( var i = 0; i < prefixes.length; i++ ) {
 				if ( ( prefixes[ i ] + 'Transform' ) in div.style ) {
 					this.vendorPrefix = '-' + prefixes[ i ].toLowerCase() + '-';
 					break;
 				}
 			}
-			
+
 			return this.vendorPrefix;
 		},
 
@@ -1438,7 +1438,7 @@
 })( window, jQuery );
 
 // Thumbnails module for Slider Pro.
-// 
+//
 // Adds the possibility to create a thumbnail scroller, each thumbnail
 // corresponding to a slide.
 ;(function( window, $ ) {
@@ -1449,7 +1449,7 @@
 
 	var Thumbnails = {
 
-		// Reference to the thumbnail scroller 
+		// Reference to the thumbnail scroller
 		$thumbnails: null,
 
 		// Reference to the container of the thumbnail scroller
@@ -1528,7 +1528,7 @@
 
 							shuffledThumbnails.push( $thumbnail );
 						});
-						
+
 						// Append the sorted thumbnails to the thumbnail scroller
 						this.$thumbnails.empty().append( shuffledThumbnails ) ;
 					}
@@ -1608,7 +1608,7 @@
 			// Mark the thumbnail that corresponds to the selected slide
 			this.selectedThumbnailIndex = this.selectedSlideIndex;
 			this.$thumbnails.find( '.sp-thumbnail-container' ).eq( this.selectedThumbnailIndex ).addClass( 'sp-selected-thumbnail' );
-			
+
 			// Calculate the total size of the thumbnails
 			this.thumbnailsSize = 0;
 
@@ -1669,7 +1669,7 @@
 
 					// Resize the slide
 					this.slideHeight = this.$slidesMask.height();
-						
+
 					$.each( this.slides, function( index, element ) {
 						element.setSize( that.slideWidth, that.slideHeight );
 					});
@@ -1686,12 +1686,12 @@
 					} else {
 						this.$slider.css( 'max-width', this.$slider.parent().width() - this.$thumbnailsContainer.outerWidth( true ) );
 					}
-					
+
 					this.$slidesMask.css( 'width', this.$slider.width() );
 
 					// If the slides are horizontally oriented, update the visible size and the offset
 					// of the selected slide, since the slider's size was reduced to make room for the thumbnails.
-					// 
+					//
 					// If the slides are vertically oriented, update the width and height (to maintain the aspect ratio)
 					// of the slides.
 					if ( this.settings.orientation === 'horizontal' ) {
@@ -1716,7 +1716,7 @@
 			// If the total size of the thumbnails is smaller than the thumbnail scroller' container (which has
 			// the same size as the slides container), it means that all the thumbnails will be visible, so set
 			// the position of the thumbnail scroller to 0.
-			// 
+			//
 			// If that's not the case, the thumbnail scroller will be positioned based on which thumbnail is selected.
 			if ( this.thumbnailsSize <= this.thumbnailsContainerSize || this.$thumbnails.find( '.sp-selected-thumbnail' ).length === 0 ) {
 				newThumbnailsPosition = 0;
@@ -1756,11 +1756,11 @@
 			this.$thumbnails.find( '.sp-thumbnail-container' ).eq( this.selectedThumbnailIndex ).addClass( 'sp-selected-thumbnail' );
 
 			// Calculate the new position that the thumbnail scroller needs to go to.
-			// 
+			//
 			// If the selected thumbnail has a higher index than the previous one, make sure that the thumbnail
 			// that comes after the selected thumbnail will be visible, if the selected thumbnail is not the
 			// last thumbnail in the list.
-			// 
+			//
 			// If the selected thumbnail has a lower index than the previous one, make sure that the thumbnail
 			// that's before the selected thumbnail will be visible, if the selected thumbnail is not the
 			// first thumbnail in the list.
@@ -1911,7 +1911,7 @@
 			if ( this.isThumbnailScroller === false ) {
 				return;
 			}
-			
+
 			this.off( 'sliderResize.' + NS );
 			this.off( 'gotoSlide.' + NS );
 			$( window ).off( 'resize.' + this.uniqueId + '.' + NS );
@@ -1932,7 +1932,7 @@
 			// remove the thumbnail scroller container
 			this.$thumbnails.appendTo( this.$slider );
 			this.$thumbnailsContainer.remove();
-			
+
 			// Remove any created padding
 			this.$slider.css({ 'paddingTop': '', 'paddingLeft': '', 'paddingRight': '' });
 		},
@@ -1940,10 +1940,10 @@
 		thumbnailsDefaults: {
 
 			// Sets the width of the thumbnail
-			thumbnailWidth: 100,
+			thumbnailWidth: 300,
 
 			// Sets the height of the thumbnail
-			thumbnailHeight: 80,
+			thumbnailHeight: 115,
 
 			// Sets the position of the thumbnail scroller (top, bottom, right, left)
 			thumbnailsPosition: 'bottom',
@@ -1970,7 +1970,7 @@
 		// Reference to the thumbnail scroller
 		this.$thumbnails = thumbnails;
 
-		// Reference to the thumbnail's container, which will be 
+		// Reference to the thumbnail's container, which will be
 		// created dynamically.
 		this.$thumbnailContainer = null;
 
@@ -2096,7 +2096,7 @@
 			} else {
 				this.$thumbnail.insertBefore( this.$thumbnailContainer );
 			}
-			
+
 			this.$thumbnailContainer.remove();
 		},
 
@@ -2121,7 +2121,7 @@
 })( window, jQuery );
 
 // ConditionalImages module for Slider Pro.
-// 
+//
 // Adds the possibility to specify multiple sources for each image and
 // load the image that's the most appropriate for the size of the slider.
 // For example, instead of loading a large image even if the slider will be small
@@ -2270,7 +2270,7 @@
 			newImage.insertAfter( image );
 			image.remove();
 			image = null;
-				
+
 			if ( typeof callback === 'function' ) {
 				callback( newImage );
 			}
@@ -2300,13 +2300,13 @@
 })( window, jQuery );
 
 // Retina module for Slider Pro.
-// 
+//
 // Adds the possibility to load a different image when the slider is
 // viewed on a retina screen.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'Retina.' + $.SliderPro.namespace;
 
 	var Retina = {
@@ -2318,7 +2318,7 @@
 			if ( this._isRetina() === false ) {
 				return;
 			}
-			
+
 			this.on( 'update.' + NS, $.proxy( this._checkRetinaImages, this ) );
 
 			if ( this.$slider.find( '.sp-thumbnail' ).length !== 0 ) {
@@ -2470,11 +2470,11 @@
 	};
 
 	$.SliderPro.addModule( 'Retina', Retina );
-	
+
 })( window, jQuery );
 
 // Lazy Loading module for Slider Pro.
-// 
+//
 // Adds the possibility to delay the loading of the images until the slides/thumbnails
 // that contain them become visible. This technique improves the initial loading
 // performance.
@@ -2493,7 +2493,7 @@
 
 			// The 'resize' event is fired after every update, so it's possible to use it for checking
 			// if the update made new slides become visible
-			// 
+			//
 			// Also, resizing the slider might make new slides or thumbnails visible
 			this.on( 'sliderResize.' + NS, $.proxy( this._lazyLoadingOnResize, this ) );
 
@@ -2503,7 +2503,7 @@
 			// Check visible thumbnail images when the thumbnails are updated because new thumbnail
 			// might have been added or the settings might have been changed so that more thumbnail
 			// images become visible
-			// 
+			//
 			// Also, check visible thumbnail images after the thumbnails have moved because new thumbnails might
 			// have become visible
 			this.on( 'thumbnailsUpdate.' + NS + ' ' + 'thumbnailsMoveComplete.' + NS, $.proxy( this._checkAndLoadVisibleThumbnailImages, this ) );
@@ -2517,7 +2517,7 @@
 			}
 
 			this.allowLazyLoadingCheck = false;
-			
+
 			this._checkAndLoadVisibleImages();
 
 			if ( this.$slider.find( '.sp-thumbnail' ).length !== 0 ) {
@@ -2549,7 +2549,7 @@
 				// Calculate the indexes of the first and last slide that will be checked
 				from = referencePosition - visibleOnSides - 1 > 0 ? referencePosition - visibleOnSides - 1 : 0,
 				to = referencePosition + visibleOnSides + 1 < this.getTotalSlides() - 1 ? referencePosition + visibleOnSides + 1 : this.getTotalSlides() - 1,
-				
+
 				// Get all the slides that need to be checked
 				slidesToCheck = this.slidesOrder.slice( from, to + 1 );
 
@@ -2649,7 +2649,7 @@
 			newImage.insertAfter( image );
 			image.remove();
 			image = null;
-			
+
 			if ( typeof callback === 'function' ) {
 				callback( newImage );
 			}
@@ -2670,7 +2670,7 @@
 })( window, jQuery );
 
 // Layers module for Slider Pro.
-// 
+//
 // Adds support for animated and static layers. The layers can contain any content,
 // from simple text for video elements.
 ;(function( window, $ ) {
@@ -2726,9 +2726,9 @@
 
 			// If the 'waitForLayers' option is enabled, the slider will not move to another slide
 			// until all the layers from the previous slide will be hidden. To achieve this,
-			// replace the current 'gotoSlide' function with another function that will include the 
+			// replace the current 'gotoSlide' function with another function that will include the
 			// required functionality.
-			// 
+			//
 			// Since the 'gotoSlide' method might be overridden by other modules as well, delay this
 			// override to make sure it's the last override.
 			if ( this.settings.waitForLayers === true ) {
@@ -2754,7 +2754,7 @@
 			if ( this.settings.autoScaleLayers === false ) {
 				// Show the layers for the initial slide
 				this.showLayers( this.selectedSlideIndex );
-				
+
 				return;
 			}
 
@@ -2790,7 +2790,7 @@
 			this.showLayers( this.selectedSlideIndex );
 		},
 
-		// Replace the 'gotoSlide' method with this one, which makes it possible to 
+		// Replace the 'gotoSlide' method with this one, which makes it possible to
 		// change the slide only after the layers from the previous slide are hidden.
 		_layersGotoSlide: function( index ) {
 			var that = this,
@@ -2832,7 +2832,7 @@
 
 			$.each( animatedLayers, function( index, element ) {
 
-				// If the layer is already visible, increment the counter directly, else wait 
+				// If the layer is already visible, increment the counter directly, else wait
 				// for the layer's showing animation to complete.
 				if ( element.isVisible() === true ) {
 					layerCounter++;
@@ -2871,7 +2871,7 @@
 
 			$.each( animatedLayers, function( index, element ) {
 
-				// If the layer is already invisible, increment the counter directly, else wait 
+				// If the layer is already invisible, increment the counter directly, else wait
 				// for the layer's hiding animation to complete.
 				if ( element.isVisible() === false ) {
 					layerCounter++;
@@ -2928,7 +2928,7 @@
 		}
 	};
 
-	// Override the slide's 'destroy' method in order to destroy the 
+	// Override the slide's 'destroy' method in order to destroy the
 	// layers that where added to the slide as well.
 	var slideDestroy = window.SliderProSlide.prototype.destroy;
 
@@ -2964,16 +2964,16 @@
 
 		// Indicates the layer's reference point (topLeft, bottomLeft, topRight or bottomRight)
 		this.position = null;
-		
-		// Indicates which CSS property (left or right) will be used for positioning the layer 
+
+		// Indicates which CSS property (left or right) will be used for positioning the layer
 		this.horizontalProperty = null;
-		
-		// Indicates which CSS property (top or bottom) will be used for positioning the layer 
+
+		// Indicates which CSS property (top or bottom) will be used for positioning the layer
 		this.verticalProperty = null;
 
 		// Indicates the value of the horizontal position
 		this.horizontalPosition = null;
-		
+
 		// Indicates the value of the vertical position
 		this.verticalPosition = null;
 
@@ -3016,7 +3016,7 @@
 
 			// Get the data attributes specified in HTML
 			this.data = this.$layer.data();
-			
+
 			if ( typeof this.data.width !== 'undefined' ) {
 				this.$layer.css( 'width', this.data.width );
 			}
@@ -3061,7 +3061,7 @@
 
 			// Set the horizontal position of the layer based on the data set
 			if ( this.horizontalProperty === 'center' ) {
-				
+
 				// prevent content wrapping while setting the width
 				if ( this.$layer.is( 'img' ) === false && ( typeof inlineStyle === 'undefined' || ( typeof inlineStyle !== 'undefined' && inlineStyle.indexOf( 'width' ) === -1 ) ) ) {
 					this.$layer.css( 'white-space', 'nowrap' );
@@ -3325,11 +3325,11 @@
 	};
 
 	$.SliderPro.addModule( 'Layers', Layers );
-	
+
 })( window, jQuery );
 
 // Fade module for Slider Pro.
-// 
+//
 // Adds the possibility to navigate through slides using a cross-fade effect.
 ;(function( window, $ ) {
 
@@ -3361,7 +3361,7 @@
 			if ( index === this.selectedSlideIndex ) {
 				return;
 			}
-			
+
 			// If the slides are being swiped/dragged, don't use fade, but call the original method instead.
 			// If not, which means that a new slide was selected through a button, arrows or direct call, then
 			// use fade.
@@ -3397,7 +3397,7 @@
 				// Re-assign the 'sp-selected' class to the currently selected slide
 				this.$slides.find( '.sp-selected' ).removeClass( 'sp-selected' );
 				this.$slides.find( '.sp-slide' ).eq( this.selectedSlideIndex ).addClass( 'sp-selected' );
-			
+
 				// Rearrange the slides if the slider is loopable
 				if ( that.settings.loop === true ) {
 					that._updateSlidesOrder();
@@ -3420,7 +3420,7 @@
 						var $slide = element.$slide;
 						$slide.css({ 'visibility': '', 'opacity': '', 'z-index': '' });
 					});
-					
+
 					// Reset the position of the slides and slides container
 					that._resetSlidesPosition();
 
@@ -3462,7 +3462,7 @@
 					if ( event.target !== event.currentTarget ) {
 						return;
 					}
-					
+
 					target.off( that.transitionEvent );
 					target.css( that.vendorPrefix + 'transition', '' );
 
@@ -3506,12 +3506,12 @@
 })( window, jQuery );
 
 // Touch Swipe module for Slider Pro.
-// 
+//
 // Adds touch-swipe functionality for slides.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'TouchSwipe.' + $.SliderPro.namespace;
 
 	var TouchSwipe = {
@@ -3558,7 +3558,7 @@
 
 		// Called when the slides starts being dragged
 		_onTouchStart: function( event ) {
-		
+
 			// Disable dragging if the element is set to allow selections
 			if ( $( event.target ).closest( '.sp-selectable' ).length >= 1 ) {
 				return;
@@ -3619,10 +3619,10 @@
 			// Calculate the distance of the movement on both axis
 			this.touchDistance.x = this.touchEndPoint.x - this.touchStartPoint.x;
 			this.touchDistance.y = this.touchEndPoint.y - this.touchStartPoint.y;
-			
+
 			// Calculate the distance of the swipe that takes place in the same direction as the orientation of the slides
 			// and calculate the distance from the opposite direction.
-			// 
+			//
 			// For a swipe to be valid there should more distance in the same direction as the orientation of the slides.
 			var distance = this.settings.orientation === 'horizontal' ? this.touchDistance.x : this.touchDistance.y,
 				oppositeDistance = this.settings.orientation === 'horizontal' ? this.touchDistance.y : this.touchDistance.x;
@@ -3667,7 +3667,7 @@
 
 			// Remove the 'sp-swiping' class but with a delay
 			// because there might be other event listeners that check
-			// the existence of this class, and this class should still be 
+			// the existence of this class, and this class should still be
 			// applied for those listeners, since there was a swipe event
 			setTimeout(function() {
 				that.$slider.removeClass( 'sp-swiping' );
@@ -3699,7 +3699,7 @@
 				slideArrayDistance = parseInt( slideArrayDistance, 10 ) + ( slideArrayDistance > 0 ? 1 : - 1 );
 
 				// Get the index of the currently selected slide and subtract the position index in order to obtain
-				// the new index of the selected slide. 
+				// the new index of the selected slide.
 				var nextSlideIndex = this.slidesOrder[ $.inArray( this.selectedSlideIndex, this.slidesOrder ) - slideArrayDistance ];
 
 				if ( this.settings.loop === true ) {
@@ -3724,7 +3724,7 @@
 		},
 
 		touchSwipeDefaults: {
-			
+
 			// Indicates whether the touch swipe will be enabled
 			touchSwipe: true,
 
@@ -3734,17 +3734,17 @@
 	};
 
 	$.SliderPro.addModule( 'TouchSwipe', TouchSwipe );
-	
+
 })( window, jQuery );
 
 // Caption module for Slider Pro.
-// 
+//
 // Adds a corresponding caption for each slide. The caption
 // will appear and disappear with the slide.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'Caption.' + $.SliderPro.namespace;
 
 	var Caption = {
@@ -3785,7 +3785,7 @@
 
 			// Either use a fade effect for swapping the captions or use an instant change
 			if ( this.settings.fadeCaption === true ) {
-				
+
 				// If the previous slide had a caption, fade out that caption first and when the animation is over
 				// fade in the current caption.
 				// If the previous slide didn't have a caption, fade in the current caption directly.
@@ -3827,7 +3827,7 @@
 
 			// Use CSS transitions if they are supported. If not, use JavaScript animation.
 			if ( this.supportedAnimation === 'css-3d' || this.supportedAnimation === 'css-2d' ) {
-				
+
 				// There needs to be a delay between the moment the opacity is set
 				// and the moment the transitions starts.
 				setTimeout(function(){
@@ -3880,11 +3880,11 @@
 	};
 
 	$.SliderPro.addModule( 'Caption', Caption );
-	
+
 })( window, jQuery );
 
 // Deep Linking module for Slider Pro.
-// 
+//
 // Updates the hash of the URL as the user navigates through the slides.
 // Also, allows navigating to a specific slide by indicating it in the hash.
 ;(function( window, $ ) {
@@ -3983,17 +3983,17 @@
 	};
 
 	$.SliderPro.addModule( 'DeepLinking', DeepLinking );
-	
+
 })( window, jQuery );
 
 // Autoplay module for Slider Pro.
-// 
+//
 // Adds automatic navigation through the slides by calling the
 // 'nextSlide' or 'previousSlide' methods at certain time intervals.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'Autoplay.' + $.SliderPro.namespace;
 
 	var Autoplay = {
@@ -4008,7 +4008,7 @@
 			this.on( 'update.' + NS, $.proxy( this._autoplayOnUpdate, this ) );
 		},
 
-		// Start the autoplay if it's enabled, or stop it if it's disabled but running 
+		// Start the autoplay if it's enabled, or stop it if it's disabled but running
 		_autoplayOnUpdate: function( event ) {
 			if ( this.settings.autoplay === true ) {
 				this.on( 'gotoSlide.' + NS, $.proxy( this._autoplayOnGotoSlide, this ) );
@@ -4031,7 +4031,7 @@
 			if ( this.isTimerRunning === true ) {
 				this.stopAutoplay();
 			}
-			
+
 			if ( this.isTimerPaused === false ) {
 				this.startAutoplay();
 			}
@@ -4056,7 +4056,7 @@
 		// Starts the autoplay
 		startAutoplay: function() {
 			var that = this;
-			
+
 			this.isTimerRunning = true;
 
 			this.autoplayTimer = setTimeout(function() {
@@ -4103,17 +4103,17 @@
 	};
 
 	$.SliderPro.addModule( 'Autoplay', Autoplay );
-	
+
 })(window, jQuery);
 
 // Keyboard module for Slider Pro.
-// 
+//
 // Adds the possibility to navigate through slides using the keyboard arrow keys, or
 // open the link attached to the main slide image by using the Enter key.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'Keyboard.' + $.SliderPro.namespace;
 
 	var Keyboard = {
@@ -4173,11 +4173,11 @@
 	};
 
 	$.SliderPro.addModule( 'Keyboard', Keyboard );
-	
+
 })( window, jQuery );
 
 // Full Screen module for Slider Pro.
-// 
+//
 // Adds the possibility to open the slider full-screen, using the HMTL5 FullScreen API.
 ;(function( window, $ ) {
 
@@ -4204,7 +4204,7 @@
 				document.msFullscreenEnabled ) ) {
 				return;
 			}
-		
+
 			this.on( 'update.' + NS, $.proxy( this._fullScreenOnUpdate, this ) );
 		},
 
@@ -4317,12 +4317,12 @@
 })( window, jQuery );
 
 // Buttons module for Slider Pro.
-// 
+//
 // Adds navigation buttons at the bottom of the slider.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'Buttons.' + $.SliderPro.namespace;
 
 	var Buttons = {
@@ -4336,7 +4336,7 @@
 
 		_buttonsOnUpdate: function() {
 			this.$buttons = this.$slider.find('.sp-buttons');
-			
+
 			// If there is more that one slide but the buttons weren't created yet, create the buttons.
 			// If the buttons were created but their number differs from the total number of slides, re-create the buttons.
 			// If the buttons were created but there are less than one slide, remove the buttons.s
@@ -4361,7 +4361,7 @@
 				$( '<div class="sp-button"></div>' ).appendTo( this.$buttons );
 			}
 
-			// Listen for button clicks 
+			// Listen for button clicks
 			this.$buttons.on( 'click.' + NS, '.sp-button', function() {
 				that.gotoSlide( $( this ).index() );
 			});
@@ -4375,7 +4375,7 @@
 				that.$buttons.find( '.sp-button' ).eq( event.index ).addClass( 'sp-selected-button' );
 			});
 
-			// Indicate that the slider has buttons 
+			// Indicate that the slider has buttons
 			this.$slider.addClass( 'sp-has-buttons' );
 		},
 
@@ -4407,7 +4407,7 @@
 		},
 
 		buttonsDefaults: {
-			
+
 			// Indicates whether the buttons will be created
 			buttons: true
 		}
@@ -4418,7 +4418,7 @@
 })( window, jQuery );
 
 // Arrows module for Slider Pro.
-// 
+//
 // Adds arrows for navigating to the next or previous slide.
 ;(function( window, $ ) {
 
@@ -4448,7 +4448,7 @@
 			// Create the arrows if the 'arrows' option is set to true
 			if ( this.settings.arrows === true && this.$arrows === null ) {
 				this.$arrows = $( '<div class="sp-arrows"></div>' ).appendTo( this.$slidesContainer );
-				
+
 				this.$previousArrow = $( '<div class="sp-arrow sp-previous-arrow"></div>' ).appendTo( this.$arrows );
 				this.$nextArrow = $( '<div class="sp-arrow sp-next-arrow"></div>' ).appendTo( this.$arrows );
 
@@ -4492,7 +4492,7 @@
 				this.$nextArrow.css( 'display', 'block' );
 			}
 		},
-		
+
 		_removeArrows: function() {
 			if ( this.$arrows !== null ) {
 				this.$previousArrow.off( 'click.' + NS );
@@ -4523,12 +4523,12 @@
 })( window, jQuery );
 
 // Thumbnail Touch Swipe module for Slider Pro.
-// 
+//
 // Adds touch-swipe functionality for thumbnails.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'ThumbnailTouchSwipe.' + $.SliderPro.namespace;
 
 	var ThumbnailTouchSwipe = {
@@ -4572,13 +4572,13 @@
 				this.thumbnailTouchSwipeEvents.startEvent = 'touchstart' + '.' + NS + ' mousedown' + '.' + NS;
 				this.thumbnailTouchSwipeEvents.moveEvent = 'touchmove' + '.' + NS + ' mousemove' + '.' + NS;
 				this.thumbnailTouchSwipeEvents.endEvent = 'touchend' + '.' + this.uniqueId + '.' + NS + ' mouseup' + '.' + this.uniqueId + '.' + NS;
-				
+
 				// Listen for touch swipe/mouse move events
 				this.$thumbnails.on( this.thumbnailTouchSwipeEvents.startEvent, $.proxy( this._onThumbnailTouchStart, this ) );
 				this.$thumbnails.on( 'dragstart.' + NS, function( event ) {
 					event.preventDefault();
 				});
-			
+
 				// Add the grabbing icon
 				this.$thumbnails.addClass( 'sp-grab' );
 			}
@@ -4651,10 +4651,10 @@
 			// Calculate the distance of the movement on both axis
 			this.thumbnailTouchDistance.x = this.thumbnailTouchEndPoint.x - this.thumbnailTouchStartPoint.x;
 			this.thumbnailTouchDistance.y = this.thumbnailTouchEndPoint.y - this.thumbnailTouchStartPoint.y;
-			
+
 			// Calculate the distance of the swipe that takes place in the same direction as the orientation of the thumbnails
 			// and calculate the distance from the opposite direction.
-			// 
+			//
 			// For a swipe to be valid there should more distance in the same direction as the orientation of the thumbnails.
 			var distance = this.thumbnailsOrientation === 'horizontal' ? this.thumbnailTouchDistance.x : this.thumbnailTouchDistance.y,
 				oppositeDistance = this.thumbnailsOrientation === 'horizontal' ? this.thumbnailTouchDistance.y : this.thumbnailTouchDistance.x;
@@ -4674,7 +4674,7 @@
 				var supOffset = this.thumbnailsSize - this.thumbnailsContainerSize + this.thumbnailTouchStartPosition;
 				distance = - supOffset + ( distance + supOffset ) * 0.2;
 			}
-			
+
 			this._moveThumbnailsTo( this.thumbnailTouchStartPosition + distance, true );
 		},
 
@@ -4718,7 +4718,7 @@
 
 			// Remove the 'sp-swiping' class but with a delay
 			// because there might be other event listeners that check
-			// the existence of this class, and this class should still be 
+			// the existence of this class, and this class should still be
 			// applied for those listeners, since there was a swipe event
 			setTimeout(function() {
 				that.$thumbnailsContainer.removeClass( 'sp-swiping' );
@@ -4765,12 +4765,12 @@
 })( window, jQuery );
 
 // Thumbnail Arrows module for Slider Pro.
-// 
+//
 // Adds thumbnail arrows for moving the thumbnail scroller.
 ;(function( window, $ ) {
 
 	"use strict";
-	
+
 	var NS = 'ThumbnailArrows.' + $.SliderPro.namespace;
 
 	var ThumbnailArrows = {
@@ -4788,7 +4788,7 @@
 			var that = this;
 
 			this.on( 'update.' + NS, $.proxy( this._thumbnailArrowsOnUpdate, this ) );
-			
+
 			// Check if the arrows need to be visible or invisible when the thumbnail scroller
 			// resizes and when the thumbnail scroller moves.
 			this.on( 'sliderResize.' + NS + ' ' + 'thumbnailsMoveComplete.' + NS, function() {
@@ -4797,11 +4797,11 @@
 				}
 			});
 		},
-		
+
 		// Called when the slider is updated
 		_thumbnailArrowsOnUpdate: function() {
 			var that = this;
-			
+
 			if ( this.isThumbnailScroller === false ) {
 				return;
 			}
@@ -4809,7 +4809,7 @@
 			// Create or remove the thumbnail scroller arrows
 			if ( this.settings.thumbnailArrows === true && this.$thumbnailArrows === null ) {
 				this.$thumbnailArrows = $( '<div class="sp-thumbnail-arrows"></div>' ).appendTo( this.$thumbnailsContainer );
-				
+
 				this.$previousThumbnailArrow = $( '<div class="sp-thumbnail-arrow sp-previous-thumbnail-arrow"></div>' ).appendTo( this.$thumbnailArrows );
 				this.$nextThumbnailArrow = $( '<div class="sp-thumbnail-arrow sp-next-thumbnail-arrow"></div>' ).appendTo( this.$thumbnailArrows );
 
@@ -4894,7 +4894,7 @@
 	"use strict";
 
 	var NS = 'Video.' + $.SliderPro.namespace;
-	
+
 	var Video = {
 
 		initVideo: function() {
@@ -5019,7 +5019,7 @@
 
 				// Get the source of the iframe that will be created
 				src = provider === 'youtube' ? 'http://www.youtube.com/embed/' + id + '?enablejsapi=1&wmode=opaque' : 'http://player.vimeo.com/video/'+ id +'?api=1';
-				
+
 				// Get the attributes passed to the video link and then pass them to the iframe's src
 				videoAttributes = href.split( '?' )[ 1 ];
 
@@ -5147,7 +5147,7 @@
 	};
 
 	$.SliderPro.addModule( 'Video', Video );
-	
+
 })( window, jQuery );
 
 // Video Controller jQuery plugin
@@ -5196,7 +5196,7 @@ VideoController.prototype = {
 
 		// Add event listeners
 		var events = [ 'ready', 'start', 'play', 'pause', 'ended' ];
-		
+
 		$.each( events, function( index, element ) {
 			var event = 'video' + element.charAt( 0 ).toUpperCase() + element.slice( 1 );
 
@@ -5208,7 +5208,7 @@ VideoController.prototype = {
 			});
 		});
 	},
-	
+
 	play: function() {
 		if ( isIOS === true && this.player.isStarted() === false || this.player.getState() === 'playing' ) {
 			return;
@@ -5216,7 +5216,7 @@ VideoController.prototype = {
 
 		this.player.play();
 	},
-	
+
 	stop: function() {
 		if ( isIOS === true && this.player.isStarted() === false || this.player.getState() === 'stopped' ) {
 			return;
@@ -5224,7 +5224,7 @@ VideoController.prototype = {
 
 		this.player.stop();
 	},
-	
+
 	pause: function() {
 		if ( isIOS === true && this.player.isStarted() === false || this.player.getState() === 'paused' ) {
 			return;
@@ -5237,14 +5237,14 @@ VideoController.prototype = {
 		if ( isIOS === true && this.player.isStarted() === false ) {
 			return;
 		}
-		
+
 		this.player.replay();
 	},
 
 	on: function( type, callback ) {
 		return this.$video.on( type, callback );
 	},
-	
+
 	off: function( type ) {
 		return this.$video.off( type );
 	},
@@ -5347,7 +5347,7 @@ Video.prototype = {
 	on: function( type, callback ) {
 		return this.events.on( type, callback );
 	},
-	
+
 	off: function( type ) {
 		return this.events.off( type );
 	},
@@ -5371,7 +5371,7 @@ var YoutubeVideo = function( video ) {
 		Video.call( this, video );
 	} else {
 		YoutubeVideoHelper.youtubeVideos.push({ 'video': video, 'scope': this });
-		
+
 		if ( YoutubeVideoHelper.youtubeAPIAdded === false ) {
 			YoutubeVideoHelper.youtubeAPIAdded = true;
 
@@ -5409,7 +5409,7 @@ YoutubeVideo.prototype._init = function() {
 	this.init = true;
 	this._setup();
 };
-	
+
 YoutubeVideo.prototype._setup = function() {
 	var that = this;
 
@@ -5420,7 +5420,7 @@ YoutubeVideo.prototype._setup = function() {
 				that.trigger({ type: 'ready' });
 				that.ready = true;
 			},
-			
+
 			'onStateChange': function( event ) {
 				switch ( event.data ) {
 					case YT.PlayerState.PLAYING:
@@ -5432,12 +5432,12 @@ YoutubeVideo.prototype._setup = function() {
 						that.state = 'playing';
 						that.trigger({ type: 'play' });
 						break;
-					
+
 					case YT.PlayerState.PAUSED:
 						that.state = 'paused';
 						that.trigger({ type: 'pause' });
 						break;
-					
+
 					case YT.PlayerState.ENDED:
 						that.state = 'ended';
 						that.trigger({ type: 'ended' });
@@ -5520,11 +5520,11 @@ var VimeoVideo = function( video ) {
 			tag.src = "http://a.vimeocdn.com/js/froogaloop2.min.js";
 			var firstScriptTag = document.getElementsByTagName( 'script' )[0];
 			firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
-		
+
 			var checkVimeoAPITimer = setInterval(function() {
 				if ( typeof window.Froogaloop !== 'undefined' ) {
 					clearInterval( checkVimeoAPITimer );
-					
+
 					$.each( VimeoVideoHelper.vimeoVideos, function( index, element ) {
 						Video.call( element.scope, element.video );
 					});
@@ -5560,11 +5560,11 @@ VimeoVideo.prototype._setup = function() {
 
 	// Get a reference to the player
 	this.player = $f( this.$video[0] );
-	
+
 	this.player.addEvent( 'ready', function() {
 		that.ready = true;
 		that.trigger({ type: 'ready' });
-		
+
 		that.player.addEvent( 'play', function() {
 			if ( that.started === false ) {
 				that.started = true;
@@ -5574,12 +5574,12 @@ VimeoVideo.prototype._setup = function() {
 			that.state = 'playing';
 			that.trigger({ type: 'play' });
 		});
-		
+
 		that.player.addEvent( 'pause', function() {
 			that.state = 'paused';
 			that.trigger({ type: 'pause' });
 		});
-		
+
 		that.player.addEvent( 'finish', function() {
 			that.state = 'ended';
 			that.trigger({ type: 'ended' });
@@ -5665,12 +5665,12 @@ HTML5Video.prototype._init = function() {
 		that.state = 'playing';
 		that.trigger({ type: 'play' });
 	});
-	
+
 	this.player.addEventListener( 'pause', function() {
 		that.state = 'paused';
 		that.trigger({ type: 'pause' });
 	});
-	
+
 	this.player.addEventListener( 'ended', function() {
 		that.state = 'ended';
 		that.trigger({ type: 'ended' });
@@ -5716,7 +5716,7 @@ VideoJSVideo.isType = function( video ) {
 VideoJSVideo.prototype._init = function() {
 	var that = this,
 		videoID = this.$video.hasClass( 'video-js' ) ? this.$video.attr( 'id' ) : this.$video.attr( 'data-videojs-id' );
-	
+
 	this.player = videojs( videoID );
 
 	this.player.ready(function() {
@@ -5732,12 +5732,12 @@ VideoJSVideo.prototype._init = function() {
 			that.state = 'playing';
 			that.trigger({ type: 'play' });
 		});
-		
+
 		that.player.on( 'pause', function() {
 			that.state = 'paused';
 			that.trigger({ type: 'pause' });
 		});
-		
+
 		that.player.on( 'ended', function() {
 			that.state = 'ended';
 			that.trigger({ type: 'ended' });
@@ -5871,7 +5871,7 @@ JWPlayerVideo.prototype._init = function() {
 	this.player.onReady(function() {
 		that.ready = true;
 		that.trigger({ type: 'ready' });
-	
+
 		that.player.onPlay(function() {
 			if ( that.started === false ) {
 				that.started = true;
@@ -5886,7 +5886,7 @@ JWPlayerVideo.prototype._init = function() {
 			that.state = 'paused';
 			that.trigger({ type: 'pause' });
 		});
-		
+
 		that.player.onComplete(function() {
 			that.state = 'ended';
 			that.trigger({ type: 'ended' });

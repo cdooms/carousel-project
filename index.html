@@ -39,8 +39,6 @@
 <link rel="stylesheet" href="assets/css/helper-styles.css">
 <link rel="stylesheet" href="assets/css/layout-styles.css">
 <link rel="stylesheet" href="assets/css/print-styles.css">
-<!-- <link rel="stylesheet" href="assets/css/slider-pro.min.css"/>
- --><link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
 <!-- Uncomment to include modernizer.js
 <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -58,32 +56,51 @@
       <a class="show-all" href="index.html" >Show all news</a>
 
       <div class="slider-pro" id="my-slider">
+
         <div class="sp-slides">
-            <!-- Slide 1 -->
-            <div class="sp-slide red">
-                <img class="sp-image" src="http://bqworks.com/slider-pro/images/image1_large.jpg"/>
-            </div>
+          <!-- Slide 1 -->
+          <div class="sp-slide beige">
+            <img class="sp-image-small" src="assets/img/layout/img2.jpg"/>
+          </div>
 
-            <!-- Slide 2 -->
-            <div class="sp-slide">
-                <img class="sp-image" src="http://bqworks.com/slider-pro/images/image2_large.jpg"/>
-            </div>
+          <!-- Slide 2 -->
+          <div class="sp-slide red">
+              <img class="sp-image-small" src="assets/img/layout/img1.jpg"/>
+          </div>
 
-            <!-- Slide 3 -->
-            <div class="sp-slide">
-                <img class="sp-image" src="http://bqworks.com/slider-pro/images/image3_large.jpg"/>
-            </div>
+          <!-- Slide 3 -->
+          <div class="sp-slide blue">
+            <img class="sp-image-small" src="assets/img/layout/img3.jpg"/>
+          </div>
+
+          <div class="sp-slide orange">
+              <img class="sp-image-small" src="assets/img/layout/img1.jpg"/>
+          </div>
+
         </div>
 
+
         <div class="sp-thumbnails">
-          <img class="sp-thumbnail" src="path/to/thumbnail.jpg"/>
-
-          <p class="sp-thumbnail">Thumbnail 2</p>
-
-          <div class="sp-thumbnail">
-            <img class="sp-thumbnail-image" src="path/to/thumbnail.jpg"/>
+          <div class="sp-thumbnail beige">
+            <span class="event">Event</span>
             <p class="sp-thumbnail-text">Tempor incididunt ut labore et dolore magna</p>
           </div>
+
+          <div class="sp-thumbnail red">
+            <span class="news">News</span>
+            <p class="sp-thumbnail-text">Markus J. Beyrer addresses Tripartite Social Summit</p>
+          </div>
+
+          <div class="sp-thumbnail blue">
+          <span class="topic">Topic</span>
+            <p class="sp-thumbnail-text">Tempor incididunt ut labore et dolore magna</p>
+          </div>
+
+          <div class="sp-thumbnail orange">
+            <span class="press">Press Release</span>
+            <p class="sp-thumbnail-text">Markus J. Beyrer addresses Tripartite Social Summit</p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -91,25 +108,35 @@
 
 
 <!-- JavaScript libraries -->
-<script src="js/libs/jquery.min.js"></script>
-<script src="js/libs/bootstrap.js"></script>
+<script src="/assets/js/vendor/jquery.min.js"></script>
 <!-- Javascripts -->
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
-<script src="js/vendor/jquery.sliderPro.min.js"></script>
+<script src="/assets/js/vendor/jquery.sliderPro.min.js"></script>
+<script src="/assets/js/base.js"></script>
+
 <script type="text/javascript">
-    jQuery( document ).ready(function( $ ) {
-      $( '#my-slider' ).sliderPro({
-        width: 960,
-        height: 500,
-        arrows: true,
-        buttons: false,
-        waitForLayers: true,
-        fade: true,
-        autoplay: false,
-        autoScaleLayers: false
-      });
+  jQuery( document ).ready(function( $ ) {
+    $( '#my-slider' ).sliderPro({
+      width: 1200,
+      height: 500,
+      arrows: true,
+      fadeArrows: false,
+      buttons: false,
+      waitForLayers: true,
+      fade: true,
+      autoplay: true,
+      autoScaleLayers: false,
+      thumbnailWidth: 300,
+      thumbnailHeight: 115,
+      updateHash: true,
+      thumbnailTouchSwipe: false,
+      gotoSlideComplete: function( event ) {
+        $( ".sp-selected-thumbnail" ).next(".sp-thumbnail-container").addClass( "margin-left" );
+      },
+      gotoThumbnail: function( event ) {
+        $( ".sp-selected-thumbnail" ).removeClass("margin-left");
+      }
     });
+  });
 </script>
 
 

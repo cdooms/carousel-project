@@ -302,6 +302,26 @@ a:hover {
   color: #feb856;
 }
 
+.news {
+  text-transform: uppercase;
+  color: #e54126;
+}
+
+.event {
+  text-transform: uppercase;
+  color: #cdc7a3;
+}
+
+.topic {
+  text-transform: uppercase;
+  color: #0085c3;
+}
+
+.press {
+  text-transform: uppercase;
+  color: #feb856;
+}
+
 *,
 *:after,
 *:before {
@@ -330,7 +350,7 @@ dl {
 }
 
 body {
-  background-color: white;
+  background-color: #eeeae9;
 }
 
 table,
