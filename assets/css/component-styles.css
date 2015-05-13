@@ -47,6 +47,7 @@
 --------------------------------------------------*/
 .sp-thumbnails-container {
   position: relative;
+  overflow: hidden;
 }
 
 .sp-top-thumbnails,
@@ -62,8 +63,9 @@
 }
 
 .sp-bottom-thumbnails {
-  margin-top: 30px;
-  margin-bottom: -30px;
+  margin-top: 0;
+  margin-bottom: -53px;
+  padding-bottom: 25px;
 }
 
 .sp-left-thumbnails,
@@ -84,6 +86,7 @@
 
 .sp-thumbnails {
   position: relative;
+  margin-top: 30px;
 }
 
 .sp-thumbnail {
@@ -419,7 +422,7 @@
 .sp-horizontal .sp-arrows {
   width: 100%;
   left: 0;
-  bottom: -75px;
+  bottom: -50px;
 }
 
 .sp-vertical .sp-arrows {
@@ -776,14 +779,26 @@ a.sp-video:after {
 .slider-pro .sp-slide.orange {
   border-top: 8px solid #feb856;
 }
-.slider-pro .sp-thumbnail-container.margin-left {
-  margin-left: 250px;
+.slider-pro .sp-thumbnail-container.thumbnail-left {
+  position: absolute;
+  left: 7%;
+}
+.slider-pro .sp-thumbnail-container.thumbnail-left .sp-thumbnail {
+  visibility: visible;
+}
+.slider-pro .sp-thumbnail-container.thumbnail-right {
+  position: absolute;
+  right: 23%;
+}
+.slider-pro .sp-thumbnail-container.thumbnail-right .sp-thumbnail {
+  visibility: visible;
 }
 .slider-pro .sp-thumbnail-container .sp-thumbnail {
   color: black;
-  padding: 20px;
+  padding: 10px 15px;
   background: white;
   height: 100%;
+  visibility: hidden;
 }
 .slider-pro .sp-thumbnail-container .sp-thumbnail.red {
   background: #fcedea;
@@ -801,17 +816,27 @@ a.sp-video:after {
   background: #fff5e9;
   border-bottom: 8px solid #feb856;
 }
+.slider-pro .sp-thumbnail-container .sp-thumbnail .sp-thumbnail-text {
+  font-size: 14px;
+  margin: 5px 0 0;
+}
 .slider-pro .sp-thumbnail-container.sp-selected-thumbnail {
-  width: 500px !important;
-  height: 135px !important;
+  width: 417px !important;
+  height: 124px !important;
   position: absolute;
   left: 50%;
-  margin-left: -250px;
+  margin-left: -295px;
   z-index: 1;
   margin-top: -15px;
 }
 .slider-pro .sp-thumbnail-container.sp-selected-thumbnail .sp-thumbnail {
   background: white;
+  padding: 20px;
+  visibility: visible;
+}
+.slider-pro .sp-thumbnail-container.sp-selected-thumbnail .sp-thumbnail .sp-thumbnail-text {
+  font-size: 16px;
+  margin: 1em 0;
 }
 
 /*# sourceMappingURL=component-styles.css.map */

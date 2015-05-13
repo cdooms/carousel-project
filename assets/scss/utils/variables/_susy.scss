@@ -19,10 +19,10 @@ $susy: (
   global-box-sizing: content-box,
   last-flow: to,
   debug: (
-    image: show,
+    image: hide,
     color: rgba(#66F, .25),
     output: overlay,
-    toggle: bottom right,
+    // toggle: bottom right,
   ),
   use-custom: (
     background-image: true,

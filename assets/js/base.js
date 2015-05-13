@@ -1,48 +1,39 @@
-(function($, Drupal) {
-  var helper, site;
-
-  helper = {
-    scrollTo: function(target) {
-      var destination, speed, topoffset;
-
-      if ($(target).offset() !== null) {
-        topoffset = 70;
-        speed = 600;
-        destination = $(target).offset().top - topoffset;
-        $("html:not(:animated),body:not(:animated)").animate({
-          scrollTop: destination
-        }, speed, function() {
-          return $(document).scrollTop(destination);
-        });
+jQuery( document ).ready(function( $ ) {
+  console.log("test");
+  $( "#my-slider" ).sliderPro({
+    width: 1200,
+    height: 500,
+    arrows: true,
+    fadeArrows: false,
+    buttons: false,
+    waitForLayers: true,
+    fade: true,
+    autoplay: true,
+    autoScaleLayers: false,
+    thumbnailWidth: 390,
+    thumbnailHeight: 84,
+    updateHash: true,
+    thumbnailTouchSwipe: false,
+    init: function(  ) {
+      $(".sp-thumbnails-container").css("width", "900px");
+      if ( $(".sp-selected-thumbnail").is(":first-child")) {
+        $( ".sp-thumbnail-container" ).last().addClass( "thumbnail-left" );
+        $( ".sp-selected-thumbnail" ).next(".sp-thumbnail-container").addClass( "thumbnail-right" );
       }
-      return false;
+    },
+    gotoThumbnail: function(  ) {
+      $( ".sp-thumbnails" ).css( "transform", "translate3d(-92px, 0px, 0px)" );
+      $( ".thumbnail-left" ).removeClass( "thumbnail-left" );
+      $( ".thumbnail-right" ).removeClass( "thumbnail-right" );
+      $( ".sp-selected-thumbnail" ).prev(".sp-thumbnail-container").addClass( "thumbnail-left" );
+      $( ".sp-selected-thumbnail" ).next(".sp-thumbnail-container").addClass( "thumbnail-right" );
+      if ( $(".sp-selected-thumbnail").is(":last-child")) {
+        $( ".sp-thumbnail-container" ).first().addClass( "thumbnail-right" );
+      }
+      if ( $(".sp-selected-thumbnail").is(":first-child")) {
+        $( ".sp-thumbnail-container" ).last().addClass( "thumbnail-left" );
+      }
     }
-  };
-
-  // site = {
-  //   carousel: {
-  //     attach: function() {
-  //       $( "#my-slider" ).sliderPro({
-  //         width: 100%,
-  //         arrows: true,
-  //         buttons: true,
-  //         waitForLayers: true,
-  //         fade: true,
-  //         autoplay: false,
-  //         autoScaleLayers: false
-  //       });
-  //     }
-  //   };
-  // };
-
-  _.extend(Drupal.behaviors, site);
-
-  $(function() {
-    return console.log("Document is ready");
   });
+});
 
-  $(window).load(function(e) {
-    return console.log("Window is loaded" + e);
-  });
-
-})(jQuery, Drupal);
