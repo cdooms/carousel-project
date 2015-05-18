@@ -8,12 +8,22 @@ jQuery( document ).ready(function( $ ) {
     buttons: false,
     waitForLayers: true,
     fade: true,
-    autoplay: true,
+    autoplay: false,
     autoScaleLayers: false,
     thumbnailWidth: 390,
     thumbnailHeight: 84,
     updateHash: true,
     thumbnailTouchSwipe: false,
+    // breakpoints: {
+    //   800: {
+    //     width: 768,
+    //     thumbnailWidth: 120,
+    //     thumbnailHeight: 50
+    //   },
+    //   500: {
+    //     width: 480
+    //   }
+    // },
     init: function(  ) {
       $(".sp-thumbnails-container").css("width", "900px");
       if ( $(".sp-selected-thumbnail").is(":first-child")) {
@@ -35,5 +45,15 @@ jQuery( document ).ready(function( $ ) {
       }
     }
   });
+
+  // $(window).resize( function() {
+  //   var slider = $( '#my-slider' ).data( 'sliderPro' );
+
+  //   slider.width();
+
+  //   slider.update();
+  // });
+
+
 });
 
