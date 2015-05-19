@@ -1,0 +1,15 @@
+.test {
+  @include span(full);
+  background: $c-blue;
+  border: 2px solid $c-white;
+  color: $c-white;
+  margin: 20px 0;
+  padding: 10px;
+  text-align: center;
+}
+
+@include breakpoint($b-tablet) {
+  .test {
+    @include span(4 of 8);
+  }
+}
